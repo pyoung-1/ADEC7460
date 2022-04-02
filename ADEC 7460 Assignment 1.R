@@ -9,6 +9,7 @@ library(seasonal)
 library(tsibble)
 library(fable)
 library(fpp3)
+library(fpp2)
 
 #CHAPTER 3
 #Question 1
@@ -364,6 +365,64 @@ autoplot(Time) +
        x = "Year")
 #THE TIMES GO DOWN EACH YEAR, THE BIGGEST DECREASE IS AT THE BEGINNING OF THE EVENTS
 
+olympic_100 <- olympic_running %>% 
+  filter(Length == "100")
+model_100 <- lm(Time ~ Year, data = olympic_100)
+summary(model_100)
+
+olympic_200 <- olympic_running %>% 
+  filter(Length == "200")
+model_200 <- lm(Time ~ Year, data = olympic_200)
+summary(model_200)
+
+olympic_400 <- olympic_running %>% 
+  filter(Length == "400")
+model_400 <- lm(Time ~ Year, data = olympic_400)
+summary(model_400)
+
+olympic_800 <- olympic_running %>% 
+  filter(Length == "800")
+model_800 <- lm(Time ~ Year, data = olympic_800)
+summary(model_800)
+
+olympic_1500 <- olympic_running %>% 
+  filter(Length == "1500")
+model_1500 <- lm(Time ~ Year, data = olympic_1500)
+summary(model_1500)
+
+olympic_5000 <- olympic_running %>% 
+  filter(Length == "5000")
+model_5000 <- lm(Time ~ Year, data = olympic_5000)
+summary(model_5000)
+
+olympic_10000 <- olympic_running %>% 
+  filter(Length == "10000")
+model_10000 <- lm(Time ~ Year, data = olympic_10000)
+summary(model_10000)
+
+plot(resid(model_100))
+plot(resid(model_200))
+plot(resid(model_400))
+plot(resid(model_800))
+plot(resid(model_1500))
+plot(resid(model_5000))
+plot(resid(model_10000))
+#RESIDUALS U-SHAPED, NOT EVENLY DISTRIBUTED MEANING THE MODELS ARE NOT ADEQUATE
+
+predict_100 <- forecast(model_100, data.frame(Year = 2020))
+predict_100
+predict_200 <- forecast(model_200, data.frame(Year = 2020))
+predict_200
+predict_400 <- forecast(model_400, data.frame(Year = 2020))
+predict_400
+predict_800 <- forecast(model_800, data.frame(Year = 2020))
+predict_800
+predict_1500 <- forecast(model_1500, data.frame(Year = 2020))
+predict_1500
+predict_5000 <- forecast(model_5000, data.frame(Year = 2020))
+predict_5000
+predict_10000 <- forecast(model_10000, data.frame(Year = 2020))
+predict_10000
 
 #Question 3
 #dy/y = Beta1(dx/x)
@@ -480,7 +539,7 @@ global_economy %>%
   labs(title = "Annual Population of Afghanistan",
        y = "Population",
        x = "Year")
-#THERE IS A CLEAR UPWARD TREND IN POPULATION, WITH THE EXCEPTION OF THE CLEARLY VISIBLE
+#THERE IS AN  UPWARD TREND IN POPULATION, WITH THE EXCEPTION OF THE CLEARLY VISIBLE
 #DIP IN THE 1980S FROM THE SOVIET-AFGHAN WAR
 
 afghan_pop <- global_economy %>% 
