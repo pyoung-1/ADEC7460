@@ -39,6 +39,8 @@ library(simmer.plot)
 library(parallel)
 library(rugarch)
 
+#Modeling the next year's worth of stock performance of Goldman Sachs
+#(ticker GS) based on the past five years' closing prices
 gs <- read.csv("/BC/ADEC7460.02 Spring 2022 Predictive AnalyticsForecasting/GS.csv", stringsAsFactors=TRUE)
 
 #Formatting data
